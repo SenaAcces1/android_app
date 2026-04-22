@@ -76,6 +76,7 @@ class MainActivity : ComponentActivity() {
                                     .padding(paddingValues)
                             ) {
                                 HorizontalPager(
+
                                     state = pagerState,
                                     modifier = Modifier.weight(1f)
                                 ) { page ->
