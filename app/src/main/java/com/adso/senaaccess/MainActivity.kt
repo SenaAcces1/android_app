@@ -15,17 +15,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import com.adso.senaaccess.AuthTabBar
-import com.adso.senaaccess.LoginTab
+import androidx.compose.ui.unit.dp
 import com.adso.senaaccess.ui.theme.AppTheme
 import com.adso.senaaccess.ui.theme.DarkSurface
 import com.adso.senaaccess.ui.theme.NeonGreen
-import androidx.compose.ui.unit.dp
 
-
+// Enumeración simple para saber en qué pantalla estamos
+enum class AppScreen { HOME, AUTH }
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalFoundationApi::class)
@@ -33,52 +33,73 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
+                // Estados para controlar la navegación
+                var currentScreen by remember { mutableStateOf(AppScreen.HOME) }
+                var initialAuthPage by remember { mutableIntStateOf(0) }
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val pagerState = rememberPagerState(pageCount = { 2 })
+                    // Lógica de navegación principal
+                    if (currentScreen == AppScreen.HOME) {
+                        // Mostramos el Home que acabamos de crear
+                        Home(
+                            onNavigateToLogin = {
+                                initialAuthPage = 0 // Va a la pestaña Iniciar Sesión
+                                currentScreen = AppScreen.AUTH
+                            },
+                            onNavigateToRegister = {
+                                initialAuthPage = 1 // Va a la pestaña Registro
+                                currentScreen = AppScreen.AUTH
+                            }
+                        )
+                    } else {
 
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize(),
-                        // CLAVE: El TabBar debe ir en este parámetro, NO en la Column
-                        bottomBar = {
-                            AuthTabBar(pagerState = pagerState)
-                        }
-                    ) { paddingValues ->
-                        // El contenido (HorizontalPager) ocupará el resto de la pantalla
-                        Column(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(paddingValues)
-                        ) {
-                            HorizontalPager(
-                                state = pagerState,
-                                modifier = Modifier.weight(1f)
-                            ) { page ->
-                                when (page) {
-                                    0 -> LoginTab()
-                                    1 -> {
-                                        Box(
-                                            modifier = Modifier.fillMaxSize().background(DarkSurface),
-                                            contentAlignment = Alignment.Center
-                                        ) {
-                                            Text(
-                                                text = "El registro está deshabilitado temporalmente.\nContacte al administrador de CCyS.",
-                                                color = NeonGreen,
-                                                textAlign = TextAlign.Center,
-                                                modifier = Modifier.padding(24.dp)
-                                            )
+                        val pagerState = rememberPagerState(
+                            initialPage = initialAuthPage,
+                            pageCount = { 2 }
+                        )
+
+                        Scaffold(
+                            modifier = Modifier.fillMaxSize(),
+                            bottomBar = {
+                                AuthTabBar(pagerState = pagerState)
+                            }
+                        ) { paddingValues ->
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(paddingValues)
+                            ) {
+                                HorizontalPager(
+                                    state = pagerState,
+                                    modifier = Modifier.weight(1f)
+                                ) { page ->
+                                    when (page) {
+                                        0 -> LoginTab()
+                                        1 -> {
+                                            Box(
+                                                modifier = Modifier
+                                                    .fillMaxSize()
+                                                    .background(DarkSurface),
+                                                contentAlignment = Alignment.Center
+                                            ) {
+                                                Text(
+                                                    text = "El registro está deshabilitado temporalmente.\nContacte al administrador de CCyS.",
+                                                    color = NeonGreen,
+                                                    textAlign = TextAlign.Center,
+                                                    modifier = Modifier.padding(24.dp)
+                                                )
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
-
                 }
             }
         }
     }
-
 }

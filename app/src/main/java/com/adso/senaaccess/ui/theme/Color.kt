@@ -12,7 +12,7 @@ val GreenSena = Color(0xFF2E7D32)      // Verde base (Primario)
 val GreenDark = Color(0xFF1B5E20)      // Verde oscuro para botones presionados
 val GreenLight = Color(0xFFE8F5E9)     // Verde suave para fondos o "hover"
 val GreenAccent = Color(0xFF4CAF50)
-val SoftGray = Color(0xFFF8F9FA)
+val SoftGray = Color(0xFFC5C5C5)
 
 // Verde brillante para acentos o estados activos
 

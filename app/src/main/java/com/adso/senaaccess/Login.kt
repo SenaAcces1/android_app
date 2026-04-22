@@ -1,4 +1,4 @@
-package com.adso.senaaccess // Ajusta a tu estructura de carpetas
+package com.adso.senaaccess
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.ColorFilter
 
 import androidx.compose.ui.res.painterResource
 
-// Importa tus colores personalizados
+// Import colores
 import com.adso.senaaccess.ui.theme.*
 
 @Composable
@@ -59,7 +59,7 @@ fun LoginTab() {
         ) {
             Spacer(modifier = Modifier.height(40.dp))
 
-            // --- 3. LOGO SENA Y TÍTULO ---
+            // ---  LOGO SENA Y TÍTULO ---
             // Logo (Usamos ColorFilter para teñirlo de neón)
             Image(
                 painter = painterResource(id = R.drawable.logo_sena), // Asegúrate de tener este drawable
@@ -95,7 +95,7 @@ fun LoginTab() {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // --- 4. CAMPO CORREO (Estilo Minimalista/Línea) ---
+            // ---  CAMPO CORREO
             Text(
                 text = "Correo electrónico",
                 color = TextGray,
@@ -121,7 +121,7 @@ fun LoginTab() {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // --- 5. CAMPO CONTRASEÑA (Estilo Minimalista/Línea) ---
+            // --- CAMPO CONTRASEÑA (Línea) ---
             Text(
                 text = "Contraseña",
                 color = TextGray,
@@ -158,7 +158,7 @@ fun LoginTab() {
 
             Spacer(modifier = Modifier.height(48.dp))
 
-            // --- 6. BOTÓN INGRESAR (Verde Neón Sólido) ---
+            // ---  BOTÓN INGRESAR (Verde Neón Sólido) ---
             Button(
                 onClick = { /* Lógica de Login */ },
                 modifier = Modifier
@@ -197,7 +197,7 @@ fun LoginTab() {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // --- 7. BOTÓN INVITADO (Bordeado Neón) ---
+            // --- BOTÓN INVITADO (Bordeado Neón) ---
             OutlinedButton(
                 onClick = { /* Lógica Invitado */ },
                 modifier = Modifier
