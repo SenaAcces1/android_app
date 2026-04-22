@@ -81,14 +81,14 @@ fun Home(
 
         // --- Separador con la "o" (Igual que en la primera imagen) ---
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Divider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
+            HorizontalDivider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
             Text(text = "o", color = TextGray, modifier = Modifier.padding(horizontal = 16.dp))
-            Divider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
+            HorizontalDivider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // --- 2. BOTÓN REGISTRARSE (Bordeado Neón, igual al de "INVITADO") ---
+        // --- BOTÓN REGISTRARSE (Bordeado Neón, igual al de "INVITADO") ---
         OutlinedButton(
             onClick = onNavigateToRegister,
             modifier = Modifier

@@ -49,7 +49,7 @@ fun LoginTab() {
         )
         */
 
-        // --- 2. CONTENEDOR CENTRAL (Tarjeta con borde neón sutil) ---
+        // --. CONTENEDOR CENTRAL (Tarjeta con borde neón sutil) ---
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -83,7 +83,7 @@ fun LoginTab() {
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            Divider(color = TextGray.copy(alpha = 0.3f), thickness = 1.dp)
+            HorizontalDivider(color = TextGray.copy(alpha = 0.3f), thickness = 1.dp)
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
@@ -190,9 +190,9 @@ fun LoginTab() {
 
             // Separador con el "o" central
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Divider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
+                HorizontalDivider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
                 Text(text = "o", color = TextGray, modifier = Modifier.padding(horizontal = 16.dp))
-                Divider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
+                HorizontalDivider(modifier = Modifier.weight(1f), color = TextGray.copy(alpha = 0.3f))
             }
 
             Spacer(modifier = Modifier.height(24.dp))

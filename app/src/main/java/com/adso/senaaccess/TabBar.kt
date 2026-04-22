@@ -19,34 +19,41 @@ data class AuthTab(val label: String, val iconRes: Int)
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun AuthTabBar(pagerState: PagerState) {
+fun AuthTabBar(pagerState: PagerState, onHomeClick: () -> Unit) {
     val scope = rememberCoroutineScope()
 
     val tabs = listOf(
+        AuthTab("Home", R.drawable.ic_home),
         AuthTab("Ingresar", R.drawable.ic_login_buttom),
         AuthTab("Registro", R.drawable.ic_register)
     )
 
     NavigationBar(
-        // Aplicamos DarkBg para que se funda con el fondo del Login
         containerColor = DarkBg,
-        tonalElevation = 0.dp // Quitamos la elevación para un look más moderno y plano
+        tonalElevation = 0.dp
     ) {
         tabs.forEachIndexed { index, tab ->
-            val isSelected = pagerState.currentPage == index
+            // El tab 0 es Home, los tabs 1 y 2 corresponden a las páginas 0 y 1 del pager
+            val isSelected = when (index) {
+                0 -> false // Home nunca está "seleccionado" en este pager, nos saca de aquí
+                1 -> pagerState.currentPage == 0
+                2 -> pagerState.currentPage == 1
+                else -> false
+            }
 
             NavigationBarItem(
                 selected = isSelected,
                 onClick = {
-                    scope.launch {
-                        pagerState.animateScrollToPage(index)
+                    when (index) {
+                        0 -> onHomeClick()
+                        1 -> scope.launch { pagerState.animateScrollToPage(0) }
+                        2 -> scope.launch { pagerState.animateScrollToPage(1) }
                     }
                 },
                 label = {
                     Text(
                         text = tab.label,
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
-                        // El texto de la etiqueta también cambia a neón si está seleccionado
                         color = if (isSelected) NeonGreen else Color.Gray
                     )
                 },
@@ -58,13 +65,9 @@ fun AuthTabBar(pagerState: PagerState) {
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    // Icono seleccionado en negro para que resalte sobre la "píldora" verde
                     selectedIconColor = Color.Black,
-                    // La "píldora" de selección será tu verde neón
                     indicatorColor = NeonGreen,
-                    // El texto seleccionado
                     selectedTextColor = NeonGreen,
-                    // Colores cuando no está seleccionado
                     unselectedIconColor = Color.Gray,
                     unselectedTextColor = Color.Gray
                 )

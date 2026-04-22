@@ -64,7 +64,10 @@ class MainActivity : ComponentActivity() {
                         Scaffold(
                             modifier = Modifier.fillMaxSize(),
                             bottomBar = {
-                                AuthTabBar(pagerState = pagerState)
+                                AuthTabBar(
+                                    pagerState = pagerState,
+                                    onHomeClick = { currentScreen = AppScreen.HOME }
+                                )
                             }
                         ) { paddingValues ->
                             Column(
